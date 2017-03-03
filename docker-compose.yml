@@ -34,6 +34,8 @@ php:
         - elasticsearch
         - memcached
     mem_limit: 2000000000
+    env_file:
+        - docker.env
 
 elasticsearch:
     image: elasticsearch
