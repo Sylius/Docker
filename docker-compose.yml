@@ -26,6 +26,11 @@ services:
             MYSQL_DATABASE: sylius_dev
             MYSQL_USER: sylius
             MYSQL_PASSWORD: sylius
+    node:
+        build: node
+        working_dir: /var/www/sylius
+        volumes_from:
+            - data
     php:
         build: php
         working_dir: /var/www/sylius
