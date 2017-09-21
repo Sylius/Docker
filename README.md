@@ -8,14 +8,37 @@ This Docker Compose development environment includes
 
 # Usage
 
-First you need to install Docker and Docker Compose.
-
+1. Copy .env.dist to .env, and specify you sylius installaion
+2. Configure database as following, be careful the host and password
+```
+parameters:
+    database_host: mysql
+    database_name: sylius
+    database_user: sylius
+    database_password: sylius
+```
+3. You need to install Docker and Docker Compose.
 ```bash
 cd docker
 docker-compose up
 ```
 
+4. login into php container and install sylius.
+```
+docker exec -it $(docker-compose ps -q php) bash
+bin/console sylius:install
+```
+
+5. Access your website.
+```
+http://localhost:8080
+```
+
 Now you have a few options to get started
+
+# Todo
+
+1. [-] install gulp
 
 ## Basic
 
@@ -30,7 +53,7 @@ docker inspect $(docker-compose ps -q nginx) | grep IPAddress
 Run a `dnsdock` container before `docker-compose up`, more info: https://github.com/tonistiigi/dnsdock
 Access the containers from the dns records.
 
-# Troubleshooting
+## Troubleshooting
 
 ## How to enter a container?
 
@@ -67,3 +90,5 @@ To view the application logs, run the following commands:
 tail -f /dev/shm/sylius/app/logs/prod.log
 tail -f
 ```
+
+
