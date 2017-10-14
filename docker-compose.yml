@@ -2,6 +2,23 @@ version: '2'
 
 services:
   nginx:
+    image: nginx:latest
+    hostname: nginx.sylius.local
+      ports:
+        - "8000:80"
+    environment:
+      - NGINX_HOST=sylius.local
+      - NGINX_PORT=80
   sylius:
     build: .
+    hostname: app.sylius.local
   mysql:
+    image: mysql:5.7
+    hostname: mysql.sylius.local
+    environment:
+      MYSQL_ROOT_PASSWORD: dBXmENPATCohWcYRrcDTK8dP
+      MYSQL_DATABASE: sylius
+      MYSQL_USER: sylius
+      MYSQL_PASSWORD: FniipXyCT
+    ports:
+      - "127.0.0.1:7000:3306"
