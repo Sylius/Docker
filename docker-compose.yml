@@ -4,8 +4,8 @@ services:
   nginx:
     image: nginx:latest
     hostname: nginx.sylius.local
-      ports:
-        - "8000:80"
+    ports:
+      - "8000:80"
     environment:
       - NGINX_HOST=sylius.local
       - NGINX_PORT=80
