@@ -1,45 +1,28 @@
-data:
-    image: busybox
-    volumes:
-        - ../../:/var/www/sylius
-        - /vendor
-        - ~/.ssh/id_rsa:/root/.ssh/id_rsa:ro
-        - ~/.composer:/root/.composer
-        - /tmpfs
+version: '2'
 
-nginx:
-    image: nginx
-    links:
-        - php
-    volumes_from:
-        - data
-    volumes:
-        - ./nginx/default.conf:/etc/nginx/conf.d/default.conf:ro
-
-mysql:
-    image: mariadb
+services:
+  sylius:
+    build: .
     environment:
-        MYSQL_ROOT_PASSWORD: root
-        MYSQL_DATABASE: sylius_dev
-        MYSQL_USER: sylius
-        MYSQL_PASSWORD: sylius
+      - SYLIUS_DATABASE_HOST=mysql
+      - SYLIUS_DATABASE_USER=sylius
+      - SYLIUS_DATABASE_PASSWORD=sylius
+      - SYLIUS_MAILER_HOST=mailhog:1025
+      - SYLIUS_APP_DEV_PERMITTED=1
+    ports:
+      - 8000:80
 
-php:
-    build: php
-    working_dir: /var/www/sylius
-    volumes_from:
-        - data
-    links:
-        - mysql
-        - elasticsearch
-        - memcached
-    mem_limit: 2000000000
+  mysql:
+    image: percona:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: sylius
+      MYSQL_DATABASE: sylius_dev
+      MYSQL_USER: sylius
+      MYSQL_PASSWORD: sylius
+    ports:
+      - 127.0.0.1:3306:3306
 
-elasticsearch:
-    image: elasticsearch
-
-memcached:
-    image: memcached
-
-selenium:
-    image: selenium/standalone-chrome-debug
+  mailhog:
+    image: mailhog/mailhog:latest
+    ports:
+      - 8025:8025
