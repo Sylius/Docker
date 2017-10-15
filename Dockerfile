@@ -10,11 +10,13 @@ ENV SYLIUS_DIR ${BASE_DIR}/sylius
 WORKDIR ${BASE_DIR}
 
 # Create Sylius project
+USER www-data
 RUN composer create-project \
 		sylius/sylius-standard \
 		${SYLIUS_DIR} \
 		${SYLIUS_VERSION} \
 	&& chmod +x sylius/bin/console
+USER root
 
 # entrypoint.d scripts
 COPY entrypoint.d/* /entrypoint.d/
