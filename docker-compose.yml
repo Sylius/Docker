@@ -8,6 +8,9 @@ services:
     environment:
       - NGINX_HOST=localhost
       - NGINX_PORT=80
+    volumes:
+      - ${PWD}/sylius:/usr/src/sylius:cached
+      - ${PWD}/nginx/nginx.conf:/etc/nginx/nginx.conf
   sylius:
     build: .
     volumes:
