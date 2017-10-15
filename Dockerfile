@@ -1,7 +1,7 @@
 FROM sylius/nginx-php-fpm:latest
 MAINTAINER Sylius Docker Team <docker@sylius.org>
 
-ENV SYLIUS_VERSION 1.1@dev
+ENV SYLIUS_VERSION dev-master
 
 ENV BASE_DIR /var/www
 ENV SYLIUS_DIR ${BASE_DIR}/sylius
