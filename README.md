@@ -18,10 +18,7 @@ You can control, customize and extend the behaviour of this environment with ``m
 git clone https://github.com/sylius/docker sylius-docker
 make help
 make up
-make shell
-
-root@aa67dd3b767c:/var/www# cd sylius/
-root@aa67dd3b767c:/var/www/sylius# bin/console sylius:install
+make console CMD=sylius:install
 ```
 
 ### Accessing services and ports
