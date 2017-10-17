@@ -20,7 +20,7 @@ services:
       MYSQL_USER: sylius
       MYSQL_PASSWORD: sylius
     ports:
-      - 127.0.0.1:3306:3306
+      - 127.0.0.1:3606:3306
 
   mailhog:
     image: mailhog/mailhog:latest
