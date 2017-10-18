@@ -10,21 +10,18 @@ The development environment consists of 3 containers, running
 
 You can control, customize and extend the behaviour of this environment with ``make`` - see ``make help`` for details. It is built around the principles and ideas of the [Docker Make Stub](https://github.com/25th-floor/docker-make-stub).
 
-## Development
+# Development
 
-### Quickstart
+## Quickstart
 
 ```
 git clone https://github.com/sylius/docker sylius-docker
 make help
 make up
-make shell
-
-root@aa67dd3b767c:/var/www# cd sylius/
-root@aa67dd3b767c:/var/www/sylius# bin/console sylius:install
+make console CMD=sylius:install
 ```
 
-### Accessing services and ports
+## Accessing services and ports
 
 | Service        | Port  | Internal DNS | Exported |
 |----------------|-------|--------------|----------|
@@ -33,7 +30,7 @@ root@aa67dd3b767c:/var/www/sylius# bin/console sylius:install
 | MailHog (SMTP) | 1025  | mailhog      | No       |
 | MailHog (HTTP) | 8025  | mailhog      | Yes      |
 
-### Customizing docker-compose.yml
+## Customizing docker-compose.yml
 
 You can create a ``docker-compose.local.yml`` to further extend the docker-compose configuration by overloading the existing YAML configuration. If this file exists ``make up`` will recognize and add it as ``-f docker-compose.local.yml`` when executing docker-compose.
 
@@ -52,7 +49,19 @@ Please note array elements (ports, environments, volumes, ...) will get **merged
 
 To change the e.g. exposed ports for your local environment you have to edit ``docker-compose.yml`` for now.
 
-## Support for you Deployment Pipeline
+## Running Symfony Console
+
+You can always execute Symfony Console either by getting an interactive shell in the application container using ``make shell``. For some a more convenient way might be using ``make console`` which is a wrapper for that.
+
+When using the wrapper target you can pass arguments to ``console`` by using the ``CMD`` variable:
+
+```bash
+make console CMD=sylius:install
+make console CMD="sylius:user:promote awesome@sylius.org"
+make console CMD="sylius:theme:assets:install web --symlink --relative"
+```
+
+# Support for you Deployment Pipeline
 
 TODO
 
