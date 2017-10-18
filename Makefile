@@ -1,5 +1,12 @@
 include .stub/*.mk
 
+$(eval $(call defw,DOCKER_COMPOSE_LOCAL,docker-compose.local.yml))
+
+ifneq ("$(wildcard $(DOCKER_COMPOSE_LOCAL))","")
+	DOCKER_COMPOSE_EXTRA_OPTIONS := -f $(DOCKER_COMPOSE_LOCAL)
+endif
+
+
 .PHONY: build
 build:: ##@Docker Build the Sylius application image
 	docker build \
@@ -10,6 +17,7 @@ build:: ##@Docker Build the Sylius application image
 up:: ##@Sylius Start the Sylius stack for development (using docker-compose)
 	docker-compose \
 		-f docker-compose.yml \
+		$(DOCKER_COMPOSE_EXTRA_OPTIONS) \
 		up \
 		--build
 
