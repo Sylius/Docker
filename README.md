@@ -70,4 +70,4 @@ TODO
   * Integrate an Asset Builder
   * Run ``sylius:install`` when required
   * Run ``composer create-project`` when required (required for volume mount)
-  * Predefine project and network name (currently docker-compose generates one based on the root directory name)
+  * ~~[PR #15](https://github.com/Sylius/Docker/pull/15): Predefine project and network name (currently docker-compose generates one based on the root directory name)~~
