@@ -2,6 +2,7 @@ version: '2'
 
 services:
   sylius:
+    container_name: ${NAME}-app
     build: .
     environment:
       - SYLIUS_DATABASE_HOST=mysql
@@ -13,6 +14,7 @@ services:
       - 8000:80
 
   mysql:
+    container_name: ${NAME}-mysql
     image: percona:5.7
     environment:
       MYSQL_ROOT_PASSWORD: sylius
@@ -23,6 +25,7 @@ services:
       - 127.0.0.1:3606:3306
 
   mailhog:
+    container_name: ${NAME}-mailhog
     image: mailhog/mailhog:latest
     ports:
       - 8025:8025
