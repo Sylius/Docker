@@ -25,4 +25,7 @@ COPY entrypoint.d/* /entrypoint.d/
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/sylius_params /etc/nginx/sylius_params
 
+# Inject assets
+COPY sylius/web/assets ${SYLIUS_DIR}/web/assets
+
 RUN chown www-data.www-data /etc/nginx/sylius_params
