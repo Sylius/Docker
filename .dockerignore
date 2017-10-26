@@ -1,1 +1,2 @@
-^sylius/
+sylius/vendor
+!sylius/vendor/sylius/sylius/src/Sylius
