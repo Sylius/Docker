@@ -1,0 +1,30 @@
+# =============================================================================
+# Node builder
+# =============================================================================
+FROM node:8
+
+ENV NODE_ENV development
+
+RUN mkdir /app
+WORKDIR /app
+
+# Add Tini (for gulp watch e.g.)
+ENV TINI_VERSION v0.14.0
+ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /tini
+RUN chmod +x /tini
+
+# Build toolchain
+COPY package.json /app/package.json
+COPY yarn.lock /app/yarn.lock
+RUN yarn install \
+	&& rm -rf /usr/local/share/.cache
+
+COPY Gulpfile.js /app/Gulpfile.js
+
+#COPY --from=composer-build-env /app/vendor/sylius/sylius/src/Sylius /app/vendor/sylius/sylius/src/Sylius
+COPY sylius/vendor/sylius/sylius/src/Sylius /app/vendor/sylius/sylius/src/Sylius
+COPY sylius/web/assets /app/web/assets
+
+
+ENTRYPOINT ["/tini", "yarn"]
+CMD ["run", "gulp"]

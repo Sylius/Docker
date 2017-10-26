@@ -1,0 +1,8 @@
+FROM composer
+
+WORKDIR /app
+
+COPY docker/cache/composer /tmp/cache
+COPY composer.json /app/composer.json
+COPY composer.lock /app/composer.lock
+RUN composer global require hirak/prestissimo
