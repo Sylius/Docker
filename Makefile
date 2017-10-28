@@ -8,6 +8,12 @@ ifneq ("$(wildcard $(DOCKER_COMPOSE_LOCAL))","")
 	DOCKER_COMPOSE_EXTRA_OPTIONS := -f $(DOCKER_COMPOSE_LOCAL)
 endif
 
+$(eval $(call defw,UNAME_S,$(shell uname -s)))
+
+ifeq (Linux,$(UNAME_S))
+   $(eval $(call defw,AS_UID,$(shell id -u)))
+endif
+
 
 .PHONY: build
 build:: ##@Docker Build the Sylius application image
@@ -28,6 +34,7 @@ up:: ##@Sylius Start the Sylius stack for development (using docker-compose)
 shell:: ##@Development Bring up a shell
 	docker exec \
 		-ti \
+        -u www-data \
 		${NAME}-app \
 		bash
 
