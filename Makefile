@@ -4,8 +4,14 @@ $(eval $(call defw,DOCKER_COMPOSE_LOCAL,docker-compose.local.yml))
 $(eval $(call defw,PROJECT,sylius-standard))
 $(eval $(call defw,NAME,$(PROJECT)))
 
+UNAME_S := $(shell uname -s)
+
 ifneq ("$(wildcard $(DOCKER_COMPOSE_LOCAL))","")
-	DOCKER_COMPOSE_EXTRA_OPTIONS := -f $(DOCKER_COMPOSE_LOCAL)
+    DOCKER_COMPOSE_EXTRA_OPTIONS := -f $(DOCKER_COMPOSE_LOCAL)
+endif
+
+ifeq (Linux,$(UNAME_S))
+    $(eval $(call defw,AS_UID,$(shell id -u)))
 endif
 
 
@@ -28,6 +34,7 @@ up:: ##@Sylius Start the Sylius stack for development (using docker-compose)
 shell:: ##@Development Bring up a shell
 	docker exec \
 		-ti \
+        -u www-data \
 		${NAME}-app \
 		bash
 

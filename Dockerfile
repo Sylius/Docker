@@ -1,10 +1,15 @@
 FROM sylius/nginx-php-fpm:latest
 MAINTAINER Sylius Docker Team <docker@sylius.org>
 
+ARG AS_UID=33
+
 ENV SYLIUS_VERSION dev-master
 
 ENV BASE_DIR /var/www
 ENV SYLIUS_DIR ${BASE_DIR}/sylius
+
+#Modify UID of www-data into UID of local user
+RUN usermod -u ${AS_UID} www-data
 
 # Operate as www-data in SYLIUS_DIR per default
 WORKDIR ${BASE_DIR}
