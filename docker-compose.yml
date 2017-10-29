@@ -1,4 +1,4 @@
-version: '2'
+version: '2.1'
 
 services:
   sylius:
@@ -6,7 +6,7 @@ services:
     build:
         context: .
         args:
-            - AS_UID=${AS_UID}
+          - AS_UID=${AS_UID:-33}
     environment:
       - SYLIUS_DATABASE_HOST=mysql
       - SYLIUS_DATABASE_USER=sylius
