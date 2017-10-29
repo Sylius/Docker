@@ -7,11 +7,11 @@ $(eval $(call defw,NAME,$(PROJECT)))
 UNAME_S := $(shell uname -s)
 
 ifneq ("$(wildcard $(DOCKER_COMPOSE_LOCAL))","")
-	DOCKER_COMPOSE_EXTRA_OPTIONS := -f $(DOCKER_COMPOSE_LOCAL)
+    DOCKER_COMPOSE_EXTRA_OPTIONS := -f $(DOCKER_COMPOSE_LOCAL)
 endif
 
 ifeq (Linux,$(UNAME_S))
-	$(eval $(call defw,AS_UID,$(shell id -u)))
+    $(eval $(call defw,AS_UID,$(shell id -u)))
 endif
 
 
