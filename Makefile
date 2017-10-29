@@ -4,14 +4,14 @@ $(eval $(call defw,DOCKER_COMPOSE_LOCAL,docker-compose.local.yml))
 $(eval $(call defw,PROJECT,sylius-standard))
 $(eval $(call defw,NAME,$(PROJECT)))
 
+UNAME_S := $(shell uname -s)
+
 ifneq ("$(wildcard $(DOCKER_COMPOSE_LOCAL))","")
 	DOCKER_COMPOSE_EXTRA_OPTIONS := -f $(DOCKER_COMPOSE_LOCAL)
 endif
 
-$(eval $(call defw,UNAME_S,$(shell uname -s)))
-
 ifeq (Linux,$(UNAME_S))
-   $(eval $(call defw,AS_UID,$(shell id -u)))
+	$(eval $(call defw,AS_UID,$(shell id -u)))
 endif
 
 
