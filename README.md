@@ -12,6 +12,10 @@ You can control, customize and extend the behaviour of this environment with ``m
 
 # Development
 
+## Requirements
+
+Because ``docker-compose.yml`` uses Compose file format 2.1 at least **Docker version 1.12** ist required for this environment.
+
 ## Quickstart
 
 ```
