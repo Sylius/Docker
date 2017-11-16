@@ -14,6 +14,9 @@ ifeq (Linux,$(UNAME_S))
     $(eval $(call defw,AS_UID,$(shell id -u)))
 endif
 
+# Deps
+has_created_containers := $(shell docker ps -a -f "name=${NAME}" --format="{{.ID}}")
+
 
 .PHONY: build
 build:: ##@Docker Build the Sylius application image
@@ -29,6 +32,16 @@ up:: ##@Sylius Start the Sylius stack for development (using docker-compose)
 		$(DOCKER_COMPOSE_EXTRA_OPTIONS) \
 		up \
 		--build
+
+.PHONY: rm
+rm:: ##@Compose Clean docker-compose stack
+	docker-compose \
+		rm \
+		--force
+
+ifneq ($(has_created_containers),)
+	docker rm -f $(has_created_containers)
+endif
 
 .PHONY: shell
 shell:: ##@Development Bring up a shell
