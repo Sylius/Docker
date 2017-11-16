@@ -1,6 +1,6 @@
 # Sylius Docker Environment
 
-[![Build Status](https://travis-ci.org/Sylius/Docker.svg?branch=master)](https://travis-ci.org/Sylius/Docker.svg?branch=master)
+[![Build Status](https://travis-ci.org/Sylius/Docker.svg?branch=master)](https://travis-ci.org/Sylius/Docker)
 
 This project is intended as boilerplate and for bootstrapping your 100% dockerized Sylius development environment. It can also be used as blueprint to use in an automated deployment pipeline achieving Dev/Prod-Parity.
 
