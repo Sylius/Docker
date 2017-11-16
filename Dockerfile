@@ -3,7 +3,7 @@ MAINTAINER Sylius Docker Team <docker@sylius.org>
 
 ARG AS_UID=33
 
-ENV SYLIUS_VERSION dev-master
+ENV SYLIUS_VERSION 1.0.3
 
 ENV BASE_DIR /var/www
 ENV SYLIUS_DIR ${BASE_DIR}/sylius
@@ -20,7 +20,12 @@ RUN composer create-project \
 		sylius/sylius-standard \
 		${SYLIUS_DIR} \
 		${SYLIUS_VERSION} \
-	&& chmod +x sylius/bin/console
+	&& chmod +x sylius/bin/console \
+	# Patch Sylius Standard from master (required for version < 1.1) \
+	&& cd sylius \
+	&& rm -f app/config/parameters.yml \
+	&& curl -o app/config/parameters.yml.dist https://raw.githubusercontent.com/Sylius/Sylius-Standard/master/app/config/parameters.yml.dist \
+	&& composer run-script post-install-cmd
 USER root
 
 # entrypoint.d scripts
