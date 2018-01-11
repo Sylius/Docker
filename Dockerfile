@@ -3,7 +3,7 @@ MAINTAINER Sylius Docker Team <docker@sylius.org>
 
 ARG AS_UID=33
 
-ENV SYLIUS_VERSION 1.0.3
+ENV SYLIUS_VERSION 1.0.7
 
 ENV BASE_DIR /var/www
 ENV SYLIUS_DIR ${BASE_DIR}/sylius
