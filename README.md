@@ -20,12 +20,22 @@ Because ``docker-compose.yml`` uses Compose file format 2.1 at least **Docker ve
 
 ## Quickstart
 
+For the first run uncomment the commands in ```01-create-project.sh``` 
+
 ```
 git clone https://github.com/sylius/docker sylius-docker
 make help
 make up
 make console CMD=sylius:install
+make shell
+www-data@<container_id>:~/sylius$ yarn install
+www-data@<container_id>:~/sylius$ yarn glup
 ```
+
+This will create the project in your local sylius folder. After the first run you can just use 
+```make up```
+
+
 
 ## Accessing services and ports
 
