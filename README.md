@@ -32,7 +32,8 @@ www-data@<container_id>:~/sylius$ yarn install
 www-data@<container_id>:~/sylius$ yarn glup
 ```
 
-This will create the project in your local sylius folder. After the first run you can just use 
+This will create the project in your local sylius folder. You can then comment out the commands in ```01-create-project.sh``` 
+and run the following
 ```make up```
 
 
