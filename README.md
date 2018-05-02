@@ -24,6 +24,7 @@ Because ``docker-compose.yml`` uses Compose file format 2.1 at least **Docker ve
 git clone https://github.com/sylius/docker sylius-docker
 make help
 make up
+make create-project
 make console CMD=sylius:install
 ```
 

@@ -7,6 +7,8 @@ services:
         context: .
         args:
           - AS_UID=${AS_UID:-33}
+    volumes:
+      - ./sylius:/var/www/sylius
     environment:
       - SYLIUS_DATABASE_HOST=mysql
       - SYLIUS_DATABASE_USER=sylius

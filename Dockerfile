@@ -14,18 +14,6 @@ RUN usermod -u ${AS_UID} www-data
 # Operate as www-data in SYLIUS_DIR per default
 WORKDIR ${BASE_DIR}
 
-# Create Sylius project
-USER www-data
-RUN composer create-project \
-		sylius/sylius-standard \
-		${SYLIUS_DIR} \
-		${SYLIUS_VERSION} \
-	&& chmod +x sylius/bin/console \
-	# Patch Sylius Standard from master (required for version < 1.1) \
-	&& cd sylius \
-	&& rm -f app/config/parameters.yml \
-	&& curl -o app/config/parameters.yml.dist https://raw.githubusercontent.com/Sylius/Sylius-Standard/master/app/config/parameters.yml.dist \
-	&& composer run-script post-install-cmd
 USER root
 
 # entrypoint.d scripts
