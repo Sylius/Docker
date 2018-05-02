@@ -25,7 +25,9 @@ RUN composer create-project \
 	&& cd sylius \
 	&& rm -f app/config/parameters.yml \
 	&& curl -o app/config/parameters.yml.dist https://raw.githubusercontent.com/Sylius/Sylius-Standard/master/app/config/parameters.yml.dist \
-	&& composer run-script post-install-cmd
+	&& composer run-script post-install-cmd \
+    && yarn install \
+    && yarn run gulp
 USER root
 
 # entrypoint.d scripts
