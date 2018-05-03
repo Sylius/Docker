@@ -8,6 +8,14 @@ ENV SYLIUS_VERSION 1.1.1
 ENV BASE_DIR /var/www
 ENV SYLIUS_DIR ${BASE_DIR}/sylius
 
+RUN curl -sL https://deb.nodesource.com/setup_7.x | bash -
+
+RUN apt-get update -y && apt-get upgrade -y && apt-get install -y \
+    nodejs
+
+# Install NodeJs dependencies
+RUN npm install -g yarn gulp
+
 #Modify UID of www-data into UID of local user
 RUN usermod -u ${AS_UID} www-data
 
