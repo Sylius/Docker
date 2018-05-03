@@ -25,6 +25,11 @@ git clone https://github.com/sylius/docker sylius-docker
 make help
 make up
 make create-project
+make shell
+  - cd sylius
+  - yarn install
+  - yarn run gulp
+  - gulp
 make console CMD=sylius:install
 ```
 

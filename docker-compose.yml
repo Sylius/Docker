@@ -34,3 +34,11 @@ services:
     image: mailhog/mailhog:latest
     ports:
       - 8025:8025
+  node:
+    container_name: ${NAME}-node
+    build: 
+      context: docker/node
+    user: node
+    volumes:
+      - ./sylius:/srv/sylius
+    working_dir: /srv/sylius
