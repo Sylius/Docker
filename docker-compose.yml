@@ -1,23 +1,27 @@
-version: '2.1'
+version: '3.1'
 
 services:
-  sylius:
-    container_name: ${NAME}-app
+  nginx:
+    image: nginx:1-alpine
+    depends_on:
+      - php-fpm
+    ports:
+      - 8000:80
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/sylius_params:/etc/nginx/sylius_params
+
+  php-fpm:
     build:
-        context: .
-        args:
-          - AS_UID=${AS_UID:-33}
+      context: .
     environment:
       - SYLIUS_DATABASE_HOST=mysql
       - SYLIUS_DATABASE_USER=sylius
       - SYLIUS_DATABASE_PASSWORD=sylius
       - SYLIUS_MAILER_HOST=mailhog:1025
       - SYLIUS_APP_DEV_PERMITTED=1
-    ports:
-      - 8000:80
 
   mysql:
-    container_name: ${NAME}-mysql
     image: percona:5.7
     environment:
       MYSQL_ROOT_PASSWORD: sylius
@@ -28,7 +32,6 @@ services:
       - 127.0.0.1:3606:3306
 
   mailhog:
-    container_name: ${NAME}-mailhog
     image: mailhog/mailhog:latest
     ports:
       - 8025:8025
