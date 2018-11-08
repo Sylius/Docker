@@ -10,6 +10,7 @@ services:
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf
       - ./nginx/sylius_params:/etc/nginx/sylius_params
+      - ./src:/var/www/sylius
 
   php-fpm:
     build:
@@ -20,6 +21,8 @@ services:
       - SYLIUS_DATABASE_PASSWORD=sylius
       - SYLIUS_MAILER_HOST=mailhog:1025
       - SYLIUS_APP_DEV_PERMITTED=1
+    volumes:
+      - ./src:/var/www/sylius
 
   mysql:
     image: percona:5.7
