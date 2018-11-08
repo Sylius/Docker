@@ -1,5 +1,9 @@
 # Sylius Docker Environment
 
+## 🚨This project has been abandoned 🚨
+
+Since [Sylius-Standard v1.3.0](https://github.com/Sylius/Sylius-Standard/tree/v1.3.0) we are supporting Docker out of the box. Please use a default configuration for your end projects.
+
 [![Build Status](https://travis-ci.org/Sylius/Docker.svg?branch=master)](https://travis-ci.org/Sylius/Docker)
 
 This project is intended as boilerplate and for bootstrapping your 100% dockerized Sylius development environment. It can also be used as blueprint to use in an automated deployment pipeline achieving Dev/Prod-Parity.
