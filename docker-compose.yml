@@ -7,6 +7,8 @@ services:
         context: .
         args:
           - AS_UID=${AS_UID:-33}
+    volumes:
+      - ./sylius:/var/www/sylius
     environment:
       - SYLIUS_DATABASE_HOST=mysql
       - SYLIUS_DATABASE_USER=sylius
@@ -32,3 +34,11 @@ services:
     image: mailhog/mailhog:latest
     ports:
       - 8025:8025
+  node:
+    container_name: ${NAME}-node
+    build: 
+      context: docker/node
+    user: node
+    volumes:
+      - ./sylius:/srv/sylius
+    working_dir: /srv/sylius

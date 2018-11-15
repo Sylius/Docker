@@ -51,6 +51,14 @@ shell:: ##@Development Bring up a shell
 		${NAME}-app \
 		bash
 
+.PHONY: create-project
+create-project::
+	docker exec \
+		-it \
+	-u www-data \
+		${NAME}-app \
+	composer create-project sylius/sylius-standard sylius 1.1.1 && chmod +x sylius/bin/console
+
 .PHONY: console
 console:: ##@Development Call Symfony "console" with "console [<CMD>]"
 	docker exec \
